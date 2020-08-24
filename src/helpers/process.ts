@@ -21,7 +21,7 @@ export const gracefulShutdown = (signal: string, httpServer: Server) => {
         // Force close server after 5s
         setTimeout((): void => {
             console.log(red('🚨[Process] Forcing server close !!!'));
-            process.exit(0);
+            process.exit(1);
         }, 5000).unref();
     };
 };
