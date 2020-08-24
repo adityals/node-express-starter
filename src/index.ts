@@ -1,6 +1,7 @@
 import express, { Request, Response, Express, Router } from 'express';
 import { green } from 'chalk';
 import { json } from 'body-parser';
+import { Server } from 'http';
 import cors from 'cors';
 import { healthCheckHandler } from './router/v1';
 import { getEnv } from './config/env';
@@ -26,7 +27,7 @@ app.get('/ping', (_: Request, res: Response): void => {
 });
 
 // http server
-const server = app.listen(PORT, (): void => {
+const server: Server = app.listen(PORT, (): void => {
     const runningEnv = __PROD__ ? 'production' : 'development';
     console.log(green(`Express 🏃 on PORT ${PORT} in ${runningEnv} mode!`));
 });

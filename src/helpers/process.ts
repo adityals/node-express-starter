@@ -1,28 +1,24 @@
-import { yellow, red } from 'chalk';
+import { yellow, green, red } from 'chalk';
 import { Server } from 'http';
 /**
  * graceful shutdown
  * @param signal
  */
 export const gracefulShutdown = (signal: string, httpServer: Server) => {
-    return (err: Error) => {
+    return () => {
         console.warn(yellow(`\n[Process] Getting signal -> ${signal}...`));
-        if (err) {
-            console.error(red(`[Process] Error when get signal : ${err.stack || err}`));
-        }
 
         console.warn(yellow('[Process] closing http server ...'));
 
-        httpServer.close(() => {
-            console.warn(yellow('[Process] server closed'));
-            const processExit: number = err ? 1 : 0;
-            console.warn(yellow(`[Process] exiting with code ${processExit}`));
+        httpServer.close((): void => {
+            console.warn(green('[Process] server closed'));
+            process.exit(0);
         });
 
-        // Force close server after 5secs
-        setTimeout((e) => {
-            console.log('🚨[Process] Forcing server close !!!', e);
-            process.exit(1);
+        // Force close server after 5s
+        setTimeout((): void => {
+            console.log(red('🚨[Process] Forcing server close !!!'));
+            process.exit(0);
         }, 5000).unref();
     };
 };
