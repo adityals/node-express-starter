@@ -5,11 +5,10 @@ import { Server } from 'http';
 import cors from 'cors';
 import { healthCheckHandler } from './router/v1';
 import { getEnv } from './config/env';
-import { gracefulShutdown } from './helpers/process';
+import { gracefulShutdown, ifProd } from './helpers/process';
 
 const app: Express = express();
 const PORT: number = Number(getEnv('PORT'));
-const __PROD__: boolean = getEnv('NODE_ENV') === 'production';
 
 // middleware
 app.use(cors());
@@ -28,7 +27,7 @@ app.get('/ping', (_: Request, res: Response): void => {
 
 // http server
 const server: Server = app.listen(PORT, (): void => {
-    const runningEnv = __PROD__ ? 'production' : 'development';
+    const runningEnv = ifProd ? 'production' : 'development';
     console.log(green(`Express 🏃 on PORT ${PORT} in ${runningEnv} mode!`));
 });
 

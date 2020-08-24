@@ -1,5 +1,8 @@
 import { yellow, green, red } from 'chalk';
 import { Server } from 'http';
+
+export const ifProd: boolean = process.env.NODE_ENV === 'production';
+
 /**
  * graceful shutdown
  * @param signal
