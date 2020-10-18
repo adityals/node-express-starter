@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 /**
- * get html from figma api
+ * health check handler
  * @param req
  * @param res
  */

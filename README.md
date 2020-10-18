@@ -16,3 +16,7 @@ A starter for node express typescript with simple webpack config.
 -   `yarn build:dev` build code with webpack in **development** mode
 -   `yarn build:prod` build code with wepback in **production** mode
 -   `yarn clean` clean up dist directory
+
+### Run with docker
+- `make docker-start` to start docker with starterapp container
+- `make docker-stop` to stop and removing starterapp container

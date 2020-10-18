@@ -14,9 +14,9 @@ const PORT: number = Number(getEnv('PORT'));
 app.use(cors());
 app.use(json());
 
-// v1 endpoinnt
+// v1 endpoint
 const v1Router: Router = express.Router();
-v1Router.post('/health-check', healthCheckHandler);
+v1Router.get('/health-check', healthCheckHandler);
 app.use('/v1', v1Router);
 
 // ping
