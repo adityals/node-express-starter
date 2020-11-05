@@ -7,7 +7,7 @@ const { parsed } = config();
  * get env vale from .env file
  * @param key - key on .env
  */
-export const getEnv = (key: string): Object => {
+export const getEnv = (key: string): any => {
     try {
         if (parsed) {
             return parsed[key];

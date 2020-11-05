@@ -5,7 +5,30 @@ services:
             context: .
             dockerfile: Dockerfile
         container_name: starterapp
+        depends_on:
+            - portgres
         ports:
             - 3000:7000
         volumes:
             - .env/:/app/.env
+        networks:
+            - starterappnet
+
+    portgres:
+        image: postgres:12
+        container_name: postgres
+        ports:
+            - 5432:5432
+        volumes:
+            - ./src/database/sql/init.sql:/docker-entrypoint-initdb.d/1-init.sql
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: password
+            POSTGRES_USER: admin
+            POSTGRES_DB: starter_app
+        networks:
+            - starterappnet
+
+networks:
+    starterappnet:
+        driver: bridge

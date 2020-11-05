@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import { getHttpStatusCode } from '../../models/errorResponse';
+import JSONResponse from '../../models/response';
 
 /**
  * health check handler
@@ -6,11 +8,7 @@ import { Request, Response } from 'express';
  * @param res
  */
 export const healthCheckHandler = (_: Request, res: Response): void => {
-    try {
-        res.status(200);
-        res.send({ code: 200000, message: 'OK' });
-    } catch (err) {
-        res.status(500);
-        console.error(err);
-    }
+    const resp = new JSONResponse();
+    res.status(getHttpStatusCode(resp.code));
+    res.send(resp);
 };
