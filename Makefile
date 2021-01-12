@@ -1,6 +1,19 @@
 NOW=$(shell date)
 
-docker-start:
+bootstrap: 
+	@echo "${NOW} bootstraping..."
+	@yarn
+
+es-build:
+	@echo "${NOW} bundling source files..."
+	@echo "Start cleaning..."
+	@rm -rf dist/
+	@echo "Cleaning done..."
+	@echo "Start bundling..."
+	@go run cmd/main.go
+	@echo "${NOW} Done!"
+
+docker-start: bootstrap es-build
 	@echo "${NOW} Starting docker..."
 	@docker-compose up -d --build
 

@@ -18,7 +18,8 @@ const DB_USER: string = getEnv('PGUSER');
 const DB_HOST: string = getEnv('PGHOST');
 const DB_PASS: string = getEnv('PGPASSWORD');
 const DB_NAME: string = getEnv('PGDATABASE');
-const DB_PORT: number = Number(getEnv('PGDATABASE'));
+const DB_PORT: number = Number(getEnv('PGPORT'));
+
 const dbConfig = { user: DB_USER, password: DB_PASS, host: DB_HOST, port: DB_PORT, db: DB_NAME };
 
 // create db pool

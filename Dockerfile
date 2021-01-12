@@ -2,14 +2,11 @@ FROM node:12
 
 WORKDIR /app
 
-# copy important asset source
-COPY ./package.json package.json
-COPY ./tsconfig.json tsconfig.json
-COPY ./src src
-COPY ./webpack.config.js webpack.config.js
+# copy dist folder
+COPY ./dist ./
 
-# copy bash script
-COPY ./scripts/start.sh scripts/start.sh
-RUN ["chmod", "+x", "scripts/start.sh"]
+# setup env
+ENV NODE_ENV=production
 
-ENTRYPOINT ["scripts/start.sh"]
+# cmd
+CMD ["node", "index.js"]
