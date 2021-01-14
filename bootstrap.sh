@@ -8,6 +8,10 @@ NC='\033[0m' # No Color
 echo "Clean up dependencies..."
 rm -rf node_modules/
 
+# clean out vendor
+echo "Clean up vendor..."
+rm -rf vendor/
+
 # clean out dist directory
 echo "Clean up dist directory..."
 rm -rf dist/
@@ -16,8 +20,12 @@ rm -rf dist/
 echo "Installing dependencies..."
 yarn
 
+# installing dependencies
+echo "Installing vendor for go..."
+go mod vendor -v
+
 # copy environment
 echo "Copying env variables..."
 cp .env.example .env
 
-echo "Try ${GREEN}yarn dev:serve${NC} and Happy Development 🔥"
+echo "Bootstrapping complete!"

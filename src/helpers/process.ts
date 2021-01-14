@@ -14,11 +14,11 @@ export const gracefulShutdown = (signal: string, httpServer: Server, dbPool: Poo
     return () => {
         console.warn(yellow(`[Process] getting signal -> ${signal}...`));
 
-        console.warn(yellow('[Process] closing http server ...'));
+        console.warn(yellow('[Process] closing http server...'));
 
         httpServer.close((): void => {
             console.warn(green('[Process] server closed'));
-            console.warn(yellow('[Process] closing db conn ...'));
+            console.warn(yellow('[Process] closing db conn...'));
             dbPool.end((): void => {
                 console.warn(green('[Process] db closed'));
                 process.exit(0);
@@ -27,7 +27,7 @@ export const gracefulShutdown = (signal: string, httpServer: Server, dbPool: Poo
 
         // Force close server after 5s
         setTimeout((): void => {
-            console.log(red('[Process] 🚨 Forcing server close !!!'));
+            console.log(red('[Process] 🚨 Forcing server close!!!'));
             process.exit(1);
         }, 5000).unref();
     };
